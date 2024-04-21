@@ -12,5 +12,5 @@ data class Task(
     val userId: Long = 0,
     val title: String,
     val isCompleted: Boolean = false,
-    val createdAt: String = LocalDateTime.now().toString(),
+    val createdAt: LocalDateTime = LocalDateTime.now(),
 )
