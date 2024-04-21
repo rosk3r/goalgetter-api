@@ -1,4 +1,4 @@
-package io.shapito.tasks.auth.util.encoder
+package ru.rosk3r.goalgetterapi.auth.util.encoder
 
 import org.mindrot.jbcrypt.BCrypt
 

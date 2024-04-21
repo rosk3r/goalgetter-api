@@ -1,12 +1,12 @@
-package io.shapito.tasks.task.service
+package ru.rosk3r.goalgetterapi.task.service
 
 import ru.rosk3r.goalgetterapi.auth.repository.SessionRepository
-import io.shapito.tasks.task.model.entity.Task
-import io.shapito.tasks.task.model.request.TaskCreateRequest
-import io.shapito.tasks.task.model.request.TaskUpdateRequest
-import io.shapito.tasks.task.model.response.TaskResponse
-import io.shapito.tasks.task.repository.TaskRepository
+import ru.rosk3r.goalgetterapi.task.model.response.TaskResponse
+import ru.rosk3r.goalgetterapi.task.repository.TaskRepository
 import org.springframework.stereotype.Service
+import ru.rosk3r.goalgetterapi.task.model.entity.Task
+import ru.rosk3r.goalgetterapi.task.model.request.TaskCreateRequest
+import ru.rosk3r.goalgetterapi.task.model.request.TaskUpdateRequest
 
 @Service
 class TaskService(

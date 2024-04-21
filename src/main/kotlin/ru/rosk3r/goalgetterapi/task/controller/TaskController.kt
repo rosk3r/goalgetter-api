@@ -1,12 +1,12 @@
-package io.shapito.tasks.task.controller
+package ru.rosk3r.goalgetterapi.task.controller
 
-import io.shapito.tasks.task.model.entity.Task
-import io.shapito.tasks.task.model.request.TaskCreateRequest
-import io.shapito.tasks.task.model.request.TaskUpdateRequest
-import io.shapito.tasks.task.model.response.TaskResponse
-import io.shapito.tasks.task.service.TaskService
+import ru.rosk3r.goalgetterapi.task.model.response.TaskResponse
+import ru.rosk3r.goalgetterapi.task.service.TaskService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import ru.rosk3r.goalgetterapi.task.model.entity.Task
+import ru.rosk3r.goalgetterapi.task.model.request.TaskCreateRequest
+import ru.rosk3r.goalgetterapi.task.model.request.TaskUpdateRequest
 
 @RestController
 @RequestMapping("/tasks")

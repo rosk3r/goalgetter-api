@@ -1,9 +1,9 @@
-package io.shapito.tasks.task.repository
+package ru.rosk3r.goalgetterapi.task.repository
 
-import io.shapito.tasks.task.model.entity.Task
-import io.shapito.tasks.task.model.response.TaskResponse
+import ru.rosk3r.goalgetterapi.task.model.response.TaskResponse
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
+import ru.rosk3r.goalgetterapi.task.model.entity.Task
 
 @Repository
 interface TaskRepository : JpaRepository<Task, Long> {

@@ -1,4 +1,4 @@
-package io.shapito.tasks.task.model.entity
+package ru.rosk3r.goalgetterapi.task.model.entity
 
 import jakarta.persistence.*
 import java.time.LocalDateTime
@@ -12,5 +12,5 @@ data class Task(
     val userId: Long = 0,
     val title: String,
     val isCompleted: Boolean = false,
-    val createdAt: LocalDateTime = LocalDateTime.now(),
+    val createdAt: String = LocalDateTime.now().toString(),
 )

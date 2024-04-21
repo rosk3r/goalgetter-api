@@ -3,8 +3,8 @@ package ru.rosk3r.goalgetterapi.auth.service
 import ru.rosk3r.goalgetterapi.auth.model.entity.User
 import ru.rosk3r.goalgetterapi.auth.model.request.SignUpRequest
 import ru.rosk3r.goalgetterapi.auth.repository.UserRepository
-import io.shapito.tasks.auth.util.encoder.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
+import ru.rosk3r.goalgetterapi.auth.util.encoder.BCryptPasswordEncoder
 
 @Service
 class UserService(

@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:./database/tasks
+    username: username
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  port: 12000
