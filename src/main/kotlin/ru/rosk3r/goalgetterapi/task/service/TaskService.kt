@@ -5,7 +5,6 @@ import ru.rosk3r.goalgetterapi.auth.repository.SessionRepository
 import ru.rosk3r.goalgetterapi.task.model.entity.Task
 import ru.rosk3r.goalgetterapi.task.model.request.TaskCreateRequest
 import ru.rosk3r.goalgetterapi.task.model.request.TaskEditRequest
-import ru.rosk3r.goalgetterapi.task.model.request.TaskStatusChangeRequest
 import ru.rosk3r.goalgetterapi.task.model.response.TaskResponse
 import ru.rosk3r.goalgetterapi.task.repository.TaskRepository
 
