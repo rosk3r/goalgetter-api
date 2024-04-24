@@ -1,12 +1,13 @@
 package ru.rosk3r.goalgetterapi.task.service
 
-import ru.rosk3r.goalgetterapi.auth.repository.SessionRepository
-import ru.rosk3r.goalgetterapi.task.model.response.TaskResponse
-import ru.rosk3r.goalgetterapi.task.repository.TaskRepository
 import org.springframework.stereotype.Service
+import ru.rosk3r.goalgetterapi.auth.repository.SessionRepository
 import ru.rosk3r.goalgetterapi.task.model.entity.Task
 import ru.rosk3r.goalgetterapi.task.model.request.TaskCreateRequest
-import ru.rosk3r.goalgetterapi.task.model.request.TaskUpdateRequest
+import ru.rosk3r.goalgetterapi.task.model.request.TaskEditRequest
+import ru.rosk3r.goalgetterapi.task.model.request.TaskStatusChangeRequest
+import ru.rosk3r.goalgetterapi.task.model.response.TaskResponse
+import ru.rosk3r.goalgetterapi.task.repository.TaskRepository
 
 @Service
 class TaskService(
@@ -33,7 +34,7 @@ class TaskService(
         return task.let(taskRepository::save)
     }
 
-    fun update(id: Long, request: TaskUpdateRequest, token: String): Task {
+    fun updateStatus(id: Long, token: String): Task {
         val session = sessionRepository.getByToken(token)
         val task = taskRepository.findById(id).orElseThrow()
 
@@ -41,7 +42,19 @@ class TaskService(
             throw RuntimeException("User don't match")
         }
 
-        val copy = task.copy(isCompleted = request.isCompleted, title = request.title)
+        val copy = task.copy(isCompleted = task.isCompleted.not())
+        return copy.let(taskRepository::save)
+    }
+
+    fun edit(id: Long, request: TaskEditRequest, token: String): Task {
+        val session = sessionRepository.getByToken(token)
+        val task = taskRepository.findById(id).orElseThrow()
+
+        if (session.userId != task.userId) {
+            throw RuntimeException("User don't match")
+        }
+
+        val copy = task.copy(title = request.title)
 
         return copy.let(taskRepository::save)
     }
