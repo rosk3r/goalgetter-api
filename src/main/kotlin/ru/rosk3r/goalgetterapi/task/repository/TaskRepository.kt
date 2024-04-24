@@ -14,4 +14,5 @@ interface TaskRepository : JpaRepository<Task, Long> {
 
     fun getAllByUserId(id: Long): List<TaskResponse>
 
+    fun countByUserIdAndIsCompleted(userId: Long, isCompleted: Boolean): Long
 }
