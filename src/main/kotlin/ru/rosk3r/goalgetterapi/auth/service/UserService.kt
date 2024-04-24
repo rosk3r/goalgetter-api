@@ -1,10 +1,10 @@
 package ru.rosk3r.goalgetterapi.auth.service
 
+import org.springframework.stereotype.Service
 import ru.rosk3r.goalgetterapi.auth.model.entity.User
 import ru.rosk3r.goalgetterapi.auth.model.request.SignUpRequest
-import ru.rosk3r.goalgetterapi.auth.repository.UserRepository
-import org.springframework.stereotype.Service
 import ru.rosk3r.goalgetterapi.auth.model.response.UserStatsResponse
+import ru.rosk3r.goalgetterapi.auth.repository.UserRepository
 import ru.rosk3r.goalgetterapi.auth.util.encoder.BCryptPasswordEncoder
 import ru.rosk3r.goalgetterapi.task.repository.TaskRepository
 
@@ -35,10 +35,15 @@ class UserService(
 
             UserStatsResponse(
                 username = user.username,
-                completedTasksCount = completedTasksCount
+                completedTasksCount = completedTasksCount,
             )
         }
 
-        return userStatsList.filter { it.completedTasksCount > 0 }
+        return userStatsList
+            .filter { it.completedTasksCount > 0 }
+            .sortedByDescending { it.completedTasksCount }
+            .mapIndexed { index, userStatsResponse ->
+            userStatsResponse.copy(rank = (index + 1).toLong())
+        }
     }
 }
