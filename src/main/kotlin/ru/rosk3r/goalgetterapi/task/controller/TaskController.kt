@@ -1,13 +1,12 @@
 package ru.rosk3r.goalgetterapi.task.controller
 
-import ru.rosk3r.goalgetterapi.task.model.response.TaskResponse
-import ru.rosk3r.goalgetterapi.task.service.TaskService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import ru.rosk3r.goalgetterapi.task.model.entity.Task
 import ru.rosk3r.goalgetterapi.task.model.request.TaskCreateRequest
 import ru.rosk3r.goalgetterapi.task.model.request.TaskEditRequest
-import ru.rosk3r.goalgetterapi.task.model.request.TaskStatusChangeRequest
+import ru.rosk3r.goalgetterapi.task.model.response.TaskResponse
+import ru.rosk3r.goalgetterapi.task.service.TaskService
 
 @RestController
 @RequestMapping("/tasks")
