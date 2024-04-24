@@ -6,7 +6,8 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import ru.rosk3r.goalgetterapi.task.model.entity.Task
 import ru.rosk3r.goalgetterapi.task.model.request.TaskCreateRequest
-import ru.rosk3r.goalgetterapi.task.model.request.TaskUpdateRequest
+import ru.rosk3r.goalgetterapi.task.model.request.TaskEditRequest
+import ru.rosk3r.goalgetterapi.task.model.request.TaskStatusChangeRequest
 
 @RestController
 @RequestMapping("/tasks")
@@ -25,13 +26,21 @@ class TaskController(private val taskService: TaskService) {
         return taskService.create(request, headerValue).let { ResponseEntity.ok(it) }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/status-change/{id}")
     fun update(
-        @RequestBody request: TaskUpdateRequest,
         @PathVariable id: Long,
         @RequestHeader("token") headerValue: String
     ): ResponseEntity<Task> {
-        return taskService.update(id, request, headerValue).let { ResponseEntity.ok(it) }
+        return taskService.updateStatus(id, headerValue).let { ResponseEntity.ok(it) }
+    }
+
+    @PutMapping("/edit/{id}")
+    fun update(
+        @RequestBody request: TaskEditRequest,
+        @PathVariable id: Long,
+        @RequestHeader("token") headerValue: String
+    ): ResponseEntity<Task> {
+        return taskService.edit(id, request, headerValue).let { ResponseEntity.ok(it) }
     }
 
     @DeleteMapping("/{id}")
