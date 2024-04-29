@@ -23,6 +23,11 @@ class UserController(
         return userService.getUsersStats().let { ResponseEntity.ok(it) }
     }
 
+    @GetMapping("/stats-by-token")
+    fun getUserStatsByToken(@RequestHeader("token") headerValue: String): ResponseEntity<UserStatsResponse> {
+        return userService.getUserStatsById(headerValue).let { ResponseEntity.ok(it) }
+    }
+
     @PutMapping("/username-change")
     fun passwordChange(
         @RequestHeader("token") headerValue: String,

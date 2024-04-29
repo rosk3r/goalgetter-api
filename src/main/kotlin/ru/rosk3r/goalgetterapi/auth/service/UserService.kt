@@ -37,11 +37,9 @@ class UserService(
         val users = userRepository.findAll()
 
         val userStatsList = users.map { user ->
-            val completedTasksCount = taskRepository.countByUserIdAndIsCompleted(user.id, true)
-
             UserStatsResponse(
                 username = user.username,
-                completedTasksCount = completedTasksCount,
+                completedTasksCount = taskRepository.countByUserIdAndIsCompleted(user.id, true),
             )
         }
 
@@ -51,6 +49,32 @@ class UserService(
             .mapIndexed { index, userStatsResponse ->
                 userStatsResponse.copy(rank = (index + 1).toLong())
             }
+    }
+
+    fun getUserStatsById(token: String): UserStatsResponse {
+        val users = userRepository.findAll()
+
+        val userStatsList = users.map { user ->
+            UserStatsResponse(
+                username = user.username,
+                completedTasksCount = taskRepository.countByUserIdAndIsCompleted(user.id, true)
+            )
+        }
+
+        val sortedUserStatsList = userStatsList.sortedByDescending { it.completedTasksCount }
+
+        val session = sessionRepository.getByToken(token)
+        val user = userRepository.findUserById(session.userId)
+
+        val rank = sortedUserStatsList.indexOfFirst { it.username == user.username } + 1
+
+        val userStats = UserStatsResponse(
+            username = user.username,
+            completedTasksCount = taskRepository.countByUserIdAndIsCompleted(user.id, true),
+            rank = rank.toLong()
+        )
+
+        return userStats
     }
 
     @Transactional
