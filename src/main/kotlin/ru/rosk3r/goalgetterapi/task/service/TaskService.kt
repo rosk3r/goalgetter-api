@@ -21,13 +21,6 @@ class TaskService(
         return taskRepository.getAllByUserId(session.userId)
     }
 
-    fun getById(id: Long, token: String): Task {
-        val session = sessionRepository.getByToken(token)
-        taskRepository.getTaskByIdAndUserId(id, session.userId)
-
-        return taskRepository.findById(id).orElseThrow()
-    }
-
     @Transactional
     fun create(request: TaskCreateRequest, token: String): Task {
         val session = sessionRepository.getByToken(token)
