@@ -1,6 +1,7 @@
 package ru.rosk3r.goalgetterapi.task.service
 
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import ru.rosk3r.goalgetterapi.auth.repository.SessionRepository
 import ru.rosk3r.goalgetterapi.task.model.entity.Task
 import ru.rosk3r.goalgetterapi.task.model.request.TaskCreateRequest
@@ -27,12 +28,14 @@ class TaskService(
         return taskRepository.findById(id).orElseThrow()
     }
 
+    @Transactional
     fun create(request: TaskCreateRequest, token: String): Task {
         val session = sessionRepository.getByToken(token)
         val task = Task(title = request.title, userId = session.userId)
         return task.let(taskRepository::save)
     }
 
+    @Transactional
     fun updateStatus(id: Long, token: String): Task {
         val session = sessionRepository.getByToken(token)
         val task = taskRepository.findById(id).orElseThrow()
@@ -45,6 +48,7 @@ class TaskService(
         return copy.let(taskRepository::save)
     }
 
+    @Transactional
     fun edit(id: Long, request: TaskEditRequest, token: String): Task {
         val session = sessionRepository.getByToken(token)
         val task = taskRepository.findById(id).orElseThrow()
@@ -58,6 +62,7 @@ class TaskService(
         return copy.let(taskRepository::save)
     }
 
+    @Transactional
     fun delete(id: Long, token: String) {
         val session = sessionRepository.getByToken(token)
         val task = taskRepository.findById(id).orElseThrow()

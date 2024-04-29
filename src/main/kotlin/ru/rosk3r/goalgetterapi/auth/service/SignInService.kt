@@ -4,6 +4,7 @@ import ru.rosk3r.goalgetterapi.auth.model.entity.Session
 import ru.rosk3r.goalgetterapi.auth.model.request.SignInRequest
 import ru.rosk3r.goalgetterapi.auth.repository.UserRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import ru.rosk3r.goalgetterapi.auth.util.encoder.BCryptPasswordEncoder
 
 @Service
@@ -13,6 +14,7 @@ class SignInService(
     private val bCryptPasswordEncoder: BCryptPasswordEncoder,
 ) {
 
+    @Transactional
     fun signIn(request: SignInRequest): Session {
         val userByEmail = userRepository.findUserByEmail(request.email).orElseThrow()
         val check = bCryptPasswordEncoder.check(request.password, userByEmail.password)

@@ -4,6 +4,7 @@ import ru.rosk3r.goalgetterapi.auth.model.entity.Session
 import ru.rosk3r.goalgetterapi.auth.model.request.SignUpRequest
 import ru.rosk3r.goalgetterapi.auth.repository.UserRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class SignUpService(
@@ -13,6 +14,7 @@ class SignUpService(
     private val sessionService: SessionService,
 ) {
 
+    @Transactional
     fun signUp(request: SignUpRequest): Session {
         if (userRepository.existsUserByEmail(request.email) || userRepository.existsUserByUsername(request.username)) {
             throw RuntimeException("User already existed.")
